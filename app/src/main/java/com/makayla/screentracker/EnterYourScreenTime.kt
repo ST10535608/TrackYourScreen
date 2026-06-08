@@ -35,14 +35,31 @@ class EnterYourScreenTime : AppCompatActivity() {
         val btnNextScreen = findViewById<Button>(R.id.btnNextScreen)
 
         btnNextScreen.setOnClickListener {
+
+            // save what was typed into an Array
             dateRecorded[0] = dateEntered.text.toString()
             morningScreenTime[0] = morningScreentime.text.toString().toInt()
             afternoonScreenTime[0] = afternoonScreentime.text.toString().toInt()
             noteScreenTime[0] = noteScreentime.text.toString()
+
+            // navigate to the next screen
+        }
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+    }
+
+    fun calculateTotal(morning: IntArray, afternoon: IntArray): Int{
+
+        var total = 0
+        var counter = 0
+       while (counter < morning.count()) {
+           total += morning[counter] + afternoon[counter]
+           counter++
+       }
+        return total
     }
 }
